@@ -1,26 +1,24 @@
 # Security
 
-This directory contains the authoritative Terra Commerce authorization and threat-model documentation.
+This directory contains the authoritative Terra Commerce authorization, threat-model, and machine-readable access-control artifacts.
 
 ## Current authoritative documents
 
-- [`Authorization_Matrix_Terra_Commerce_v1.0.0_Final.md`](Authorization_Matrix_Terra_Commerce_v1.0.0_Final.md) — final role, permission, ownership, state, version, plan, support-mode, and dual-control rules.
-- [`Security_Threat_Model_Terra_Commerce_v1.0.0_Final.md`](Security_Threat_Model_Terra_Commerce_v1.0.0_Final.md) — final STRIDE-based threat model covering tenant isolation, financial actions, webhook/SSE security, infrastructure, privacy, incident response, and release gates.
+- [`Authorization_Matrix_Terra_Commerce_v1.0.0_Final.md`](Authorization_Matrix_Terra_Commerce_v1.0.0_Final.md)
+- [`Security_Threat_Model_Terra_Commerce_v1.0.0_Final.md`](Security_Threat_Model_Terra_Commerce_v1.0.0_Final.md)
 
-## Historical drafts
+## Machine-readable registry
 
-- `Authorization_Matrix_Terra_Commerce_v1.0.0_Draft.md`
-- `Security_Threat_Model_Terra_Commerce_v1.0.0_Draft.md`
+- [`operation-permission-registry.yaml`](operation-permission-registry.yaml) — deny-by-default registry index.
+- [`operation-permission-rules/`](operation-permission-rules/) — 134 operation rules matching the OpenAPI operation set exactly.
+
+The registry merges each rule with method, path, audience, ownership, idempotency, version, audit, and event metadata from the corresponding OpenAPI operation.
 
 ## Reviews
 
-- [`reviews/Authorization_Threat_Model_Audit_v1.0.0.md`](reviews/Authorization_Threat_Model_Audit_v1.0.0.md) — draft audit with five medium-priority findings.
-- [`reviews/Authorization_Threat_Model_Final_Verification_v1.0.0.md`](reviews/Authorization_Threat_Model_Final_Verification_v1.0.0.md) — PASS; all findings closed.
+- [`reviews/Authorization_Threat_Model_Final_Verification_v1.0.0.md`](reviews/Authorization_Threat_Model_Final_Verification_v1.0.0.md) — PASS.
+- [`../06-contracts/reviews/Implementation_Foundation_Verification_v1.0.0.md`](../06-contracts/reviews/Implementation_Foundation_Verification_v1.0.0.md) — PASS for the machine-readable implementation foundation.
 
 ## Downstream authority
 
-These documents govern endpoint permission metadata, authorization middleware, resource-ownership checks, support-mode controls, dual-approval workflows, security tests, CI permission-registry validation, privacy controls, incident runbooks, and production release gates.
-
-## Next recommended work
-
-Create the Technical Design Documents for the Go gateway, Medusa/Terra Commerce modules, worker/event pipeline, and infrastructure deployment using all finalized upstream specifications.
+These artifacts govern authorization middleware, operation registration, resource ownership, dual-control policies, security tests, and CI equality checks against `openapi.yaml`.
