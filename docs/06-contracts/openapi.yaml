@@ -1,0 +1,272 @@
+openapi: 3.1.0
+info:
+  title: Terra Commerce Public API
+  version: 1.0.0
+  description: Normative machine-readable API baseline for Terra Commerce. Public clients call the Go gateway under /api/v1. Custom x-terra-*
+    fields are required implementation metadata.
+servers:
+- url: https://platform.example.com/api/v1
+  description: Global administration
+- url: https://{tenant}.admin.example.com/api/v1
+  description: Tenant administration
+  variables:
+    tenant:
+      default: demo
+- url: https://{tenant}.shop.example.com/api/v1
+  description: Tenant storefront
+  variables:
+    tenant:
+      default: demo
+tags:
+- name: Catalog
+- name: Inventory and WMS
+- name: OMS
+- name: Platform
+- name: Reporting and Realtime
+- name: Shipments
+- name: Storefront
+- name: Tenant Administration
+- name: Webhooks
+components:
+  securitySchemes:
+    sessionCookie:
+      $ref: ./openapi-components.json#/securitySchemes/sessionCookie
+    oidcBearer:
+      $ref: ./openapi-components.json#/securitySchemes/oidcBearer
+    biteshipWebhookAuth:
+      $ref: ./openapi-components.json#/securitySchemes/biteshipWebhookAuth
+    midtransWebhookAuth:
+      $ref: ./openapi-components.json#/securitySchemes/midtransWebhookAuth
+paths:
+  /platform/tenants:
+    $ref: ./openapi-paths.json#/~1platform~1tenants
+  /platform/tenants/{tenant_id}:
+    $ref: ./openapi-paths.json#/~1platform~1tenants~1{tenant_id}
+  /platform/tenants/{tenant_id}/status-transitions:
+    $ref: ./openapi-paths.json#/~1platform~1tenants~1{tenant_id}~1status-transitions
+  /platform/tenants/{tenant_id}/owner-access-resets:
+    $ref: ./openapi-paths.json#/~1platform~1tenants~1{tenant_id}~1owner-access-resets
+  /platform/tenants/{tenant_id}/support-sessions:
+    $ref: ./openapi-paths.json#/~1platform~1tenants~1{tenant_id}~1support-sessions
+  /platform/plans:
+    $ref: ./openapi-paths.json#/~1platform~1plans
+  /platform/plans/{plan_id}:
+    $ref: ./openapi-paths.json#/~1platform~1plans~1{plan_id}
+  /platform/plans/{plan_id}/archive-requests:
+    $ref: ./openapi-paths.json#/~1platform~1plans~1{plan_id}~1archive-requests
+  /platform/tenants/{tenant_id}/plan-transitions:
+    $ref: ./openapi-paths.json#/~1platform~1tenants~1{tenant_id}~1plan-transitions
+  /platform/tenants/{tenant_id}/usage:
+    $ref: ./openapi-paths.json#/~1platform~1tenants~1{tenant_id}~1usage
+  /platform/health:
+    $ref: ./openapi-paths.json#/~1platform~1health
+  /platform/jobs/failed:
+    $ref: ./openapi-paths.json#/~1platform~1jobs~1failed
+  /platform/jobs/{job_id}/retry-requests:
+    $ref: ./openapi-paths.json#/~1platform~1jobs~1{job_id}~1retry-requests
+  /platform/integrations/failures:
+    $ref: ./openapi-paths.json#/~1platform~1integrations~1failures
+  /platform/settings/{key}:
+    $ref: ./openapi-paths.json#/~1platform~1settings~1{key}
+  /platform/feature-flags/{feature_key}:
+    $ref: ./openapi-paths.json#/~1platform~1feature-flags~1{feature_key}
+  /platform/maintenance-sessions:
+    $ref: ./openapi-paths.json#/~1platform~1maintenance-sessions
+  /platform/maintenance-sessions/{session_id}:
+    $ref: ./openapi-paths.json#/~1platform~1maintenance-sessions~1{session_id}
+  /tenant/profile:
+    $ref: ./openapi-paths.json#/~1tenant~1profile
+  /tenant/store:
+    $ref: ./openapi-paths.json#/~1tenant~1store
+  /tenant/warehouse:
+    $ref: ./openapi-paths.json#/~1tenant~1warehouse
+  /tenant/users:
+    $ref: ./openapi-paths.json#/~1tenant~1users
+  /tenant/user-invitations:
+    $ref: ./openapi-paths.json#/~1tenant~1user-invitations
+  /tenant/user-invitations/{invitation_id}/resend-requests:
+    $ref: ./openapi-paths.json#/~1tenant~1user-invitations~1{invitation_id}~1resend-requests
+  /tenant/user-invitations/{invitation_id}:
+    $ref: ./openapi-paths.json#/~1tenant~1user-invitations~1{invitation_id}
+  /tenant/users/{membership_id}:
+    $ref: ./openapi-paths.json#/~1tenant~1users~1{membership_id}
+  /tenant/roles:
+    $ref: ./openapi-paths.json#/~1tenant~1roles
+  /tenant/users/{membership_id}/roles:
+    $ref: ./openapi-paths.json#/~1tenant~1users~1{membership_id}~1roles
+  /tenant/usage:
+    $ref: ./openapi-paths.json#/~1tenant~1usage
+  /tenant/integrations/payment:
+    $ref: ./openapi-paths.json#/~1tenant~1integrations~1payment
+  /tenant/integrations/delivery:
+    $ref: ./openapi-paths.json#/~1tenant~1integrations~1delivery
+  /catalog/products:
+    $ref: ./openapi-paths.json#/~1catalog~1products
+  /catalog/products/{product_id}:
+    $ref: ./openapi-paths.json#/~1catalog~1products~1{product_id}
+  /catalog/products/{product_id}/publish-requests:
+    $ref: ./openapi-paths.json#/~1catalog~1products~1{product_id}~1publish-requests
+  /catalog/products/{product_id}/deactivation-requests:
+    $ref: ./openapi-paths.json#/~1catalog~1products~1{product_id}~1deactivation-requests
+  /catalog/products/{product_id}/archive-requests:
+    $ref: ./openapi-paths.json#/~1catalog~1products~1{product_id}~1archive-requests
+  /catalog/products/{product_id}/variants:
+    $ref: ./openapi-paths.json#/~1catalog~1products~1{product_id}~1variants
+  /catalog/variants/{variant_id}:
+    $ref: ./openapi-paths.json#/~1catalog~1variants~1{variant_id}
+  /catalog/categories:
+    $ref: ./openapi-paths.json#/~1catalog~1categories
+  /catalog/categories/{category_id}:
+    $ref: ./openapi-paths.json#/~1catalog~1categories~1{category_id}
+  /catalog/products/{product_id}/images:
+    $ref: ./openapi-paths.json#/~1catalog~1products~1{product_id}~1images
+  /catalog/products/{product_id}/images/{image_id}:
+    $ref: ./openapi-paths.json#/~1catalog~1products~1{product_id}~1images~1{image_id}
+  /storefront/customers/register:
+    $ref: ./openapi-paths.json#/~1storefront~1customers~1register
+  /storefront/customers/login:
+    $ref: ./openapi-paths.json#/~1storefront~1customers~1login
+  /storefront/customers/logout:
+    $ref: ./openapi-paths.json#/~1storefront~1customers~1logout
+  /storefront/customers/password-reset-requests:
+    $ref: ./openapi-paths.json#/~1storefront~1customers~1password-reset-requests
+  /storefront/customers/password-reset-confirmations:
+    $ref: ./openapi-paths.json#/~1storefront~1customers~1password-reset-confirmations
+  /storefront/customers/me:
+    $ref: ./openapi-paths.json#/~1storefront~1customers~1me
+  /storefront/customers/me/addresses:
+    $ref: ./openapi-paths.json#/~1storefront~1customers~1me~1addresses
+  /storefront/customers/me/addresses/{address_id}:
+    $ref: ./openapi-paths.json#/~1storefront~1customers~1me~1addresses~1{address_id}
+  /storefront/products:
+    $ref: ./openapi-paths.json#/~1storefront~1products
+  /storefront/products/{product_id}:
+    $ref: ./openapi-paths.json#/~1storefront~1products~1{product_id}
+  /storefront/categories:
+    $ref: ./openapi-paths.json#/~1storefront~1categories
+  /storefront/carts:
+    $ref: ./openapi-paths.json#/~1storefront~1carts
+  /storefront/carts/{cart_id}:
+    $ref: ./openapi-paths.json#/~1storefront~1carts~1{cart_id}
+  /storefront/carts/{cart_id}/items:
+    $ref: ./openapi-paths.json#/~1storefront~1carts~1{cart_id}~1items
+  /storefront/carts/{cart_id}/items/{item_id}:
+    $ref: ./openapi-paths.json#/~1storefront~1carts~1{cart_id}~1items~1{item_id}
+  /storefront/carts/{cart_id}/claim-requests:
+    $ref: ./openapi-paths.json#/~1storefront~1carts~1{cart_id}~1claim-requests
+  /storefront/carts/{cart_id}/shipping-rate-requests:
+    $ref: ./openapi-paths.json#/~1storefront~1carts~1{cart_id}~1shipping-rate-requests
+  /storefront/carts/{cart_id}/checkout-requests:
+    $ref: ./openapi-paths.json#/~1storefront~1carts~1{cart_id}~1checkout-requests
+  /storefront/orders:
+    $ref: ./openapi-paths.json#/~1storefront~1orders
+  /storefront/orders/{order_id}:
+    $ref: ./openapi-paths.json#/~1storefront~1orders~1{order_id}
+  /storefront/orders/{order_id}/tracking:
+    $ref: ./openapi-paths.json#/~1storefront~1orders~1{order_id}~1tracking
+  /storefront/orders/{order_id}/cancellation-requests:
+    $ref: ./openapi-paths.json#/~1storefront~1orders~1{order_id}~1cancellation-requests
+  /storefront/orders/{order_id}/return-requests:
+    $ref: ./openapi-paths.json#/~1storefront~1orders~1{order_id}~1return-requests
+  /orders:
+    $ref: ./openapi-paths.json#/~1orders
+  /orders/{order_id}:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}
+  /orders/{order_id}/payment-confirmations:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1payment-confirmations
+  /orders/{order_id}/cancellation-requests:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1cancellation-requests
+  /orders/{order_id}/cancellations/{request_id}/approval-requests:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1cancellations~1{request_id}~1approval-requests
+  /orders/{order_id}/cancellations/{request_id}/rejection-requests:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1cancellations~1{request_id}~1rejection-requests
+  /orders/{order_id}/notes:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1notes
+  /orders/{order_id}/timeline:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1timeline
+  /orders/{order_id}/returns:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1returns
+  /orders/{order_id}/returns/{return_id}/approval-requests:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1returns~1{return_id}~1approval-requests
+  /orders/{order_id}/returns/{return_id}/rejection-requests:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1returns~1{return_id}~1rejection-requests
+  /orders/{order_id}/refunds:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1refunds
+  /orders/{order_id}/refunds/{refund_id}/retry-requests:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1refunds~1{refund_id}~1retry-requests
+  /inventory/items:
+    $ref: ./openapi-paths.json#/~1inventory~1items
+  /inventory/items/{inventory_item_id}:
+    $ref: ./openapi-paths.json#/~1inventory~1items~1{inventory_item_id}
+  /inventory/movements:
+    $ref: ./openapi-paths.json#/~1inventory~1movements
+  /inventory/adjustments:
+    $ref: ./openapi-paths.json#/~1inventory~1adjustments
+  /inventory/alerts:
+    $ref: ./openapi-paths.json#/~1inventory~1alerts
+  /warehouse/receivings:
+    $ref: ./openapi-paths.json#/~1warehouse~1receivings
+  /warehouse/receivings/{receiving_id}:
+    $ref: ./openapi-paths.json#/~1warehouse~1receivings~1{receiving_id}
+  /warehouse/receivings/{receiving_id}/completion-requests:
+    $ref: ./openapi-paths.json#/~1warehouse~1receivings~1{receiving_id}~1completion-requests
+  /warehouse/receivings/{receiving_id}/cancellation-requests:
+    $ref: ./openapi-paths.json#/~1warehouse~1receivings~1{receiving_id}~1cancellation-requests
+  /warehouse/picking-tasks:
+    $ref: ./openapi-paths.json#/~1warehouse~1picking-tasks
+  /warehouse/picking-tasks/{task_id}:
+    $ref: ./openapi-paths.json#/~1warehouse~1picking-tasks~1{task_id}
+  /warehouse/picking-tasks/{task_id}/start-requests:
+    $ref: ./openapi-paths.json#/~1warehouse~1picking-tasks~1{task_id}~1start-requests
+  /warehouse/picking-tasks/{task_id}/pause-requests:
+    $ref: ./openapi-paths.json#/~1warehouse~1picking-tasks~1{task_id}~1pause-requests
+  /warehouse/picking-tasks/{task_id}/resume-requests:
+    $ref: ./openapi-paths.json#/~1warehouse~1picking-tasks~1{task_id}~1resume-requests
+  /warehouse/picking-tasks/{task_id}/exceptions:
+    $ref: ./openapi-paths.json#/~1warehouse~1picking-tasks~1{task_id}~1exceptions
+  /warehouse/picking-tasks/{task_id}/completion-requests:
+    $ref: ./openapi-paths.json#/~1warehouse~1picking-tasks~1{task_id}~1completion-requests
+  /warehouse/picking-tasks/{task_id}/printable:
+    $ref: ./openapi-paths.json#/~1warehouse~1picking-tasks~1{task_id}~1printable
+  /warehouse/packing-tasks:
+    $ref: ./openapi-paths.json#/~1warehouse~1packing-tasks
+  /warehouse/packing-tasks/{task_id}:
+    $ref: ./openapi-paths.json#/~1warehouse~1packing-tasks~1{task_id}
+  /warehouse/packing-tasks/{task_id}/start-requests:
+    $ref: ./openapi-paths.json#/~1warehouse~1packing-tasks~1{task_id}~1start-requests
+  /warehouse/packing-tasks/{task_id}/exceptions:
+    $ref: ./openapi-paths.json#/~1warehouse~1packing-tasks~1{task_id}~1exceptions
+  /warehouse/packing-tasks/{task_id}/completion-requests:
+    $ref: ./openapi-paths.json#/~1warehouse~1packing-tasks~1{task_id}~1completion-requests
+  /orders/{order_id}/shipments:
+    $ref: ./openapi-paths.json#/~1orders~1{order_id}~1shipments
+  /shipments/{shipment_id}:
+    $ref: ./openapi-paths.json#/~1shipments~1{shipment_id}
+  /shipments/{shipment_id}/tracking:
+    $ref: ./openapi-paths.json#/~1shipments~1{shipment_id}~1tracking
+  /shipments/{shipment_id}/label:
+    $ref: ./openapi-paths.json#/~1shipments~1{shipment_id}~1label
+  /shipments/{shipment_id}/cancellation-requests:
+    $ref: ./openapi-paths.json#/~1shipments~1{shipment_id}~1cancellation-requests
+  /shipments/{shipment_id}/reconciliation-requests:
+    $ref: ./openapi-paths.json#/~1shipments~1{shipment_id}~1reconciliation-requests
+  /dashboard:
+    $ref: ./openapi-paths.json#/~1dashboard
+  /reports:
+    $ref: ./openapi-paths.json#/~1reports
+  /reports/{report_id}:
+    $ref: ./openapi-paths.json#/~1reports~1{report_id}
+  /reports/{report_id}/download:
+    $ref: ./openapi-paths.json#/~1reports~1{report_id}~1download
+  /notifications:
+    $ref: ./openapi-paths.json#/~1notifications
+  /notifications/{notification_id}/read-receipts:
+    $ref: ./openapi-paths.json#/~1notifications~1{notification_id}~1read-receipts
+  /audit-logs:
+    $ref: ./openapi-paths.json#/~1audit-logs
+  /events/stream:
+    $ref: ./openapi-paths.json#/~1events~1stream
+  /webhooks/biteship:
+    $ref: ./openapi-paths.json#/~1webhooks~1biteship
+  /webhooks/midtrans:
+    $ref: ./openapi-paths.json#/~1webhooks~1midtrans
