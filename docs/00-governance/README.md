@@ -12,12 +12,10 @@ This directory defines how Terra Commerce specifications and implementation arti
 6. [`document-status-lifecycle.md`](document-status-lifecycle.md) — Draft, In Review, Approved, Superseded, Deprecated, and Archived states.
 7. [`definition-of-done.md`](definition-of-done.md) — completion criteria for specifications, features, APIs, events, database changes, and releases.
 
-## Current authoritative upstream baseline
+## Current baseline
 
-- [`../01-product/prd/PRD_Terra_Commerce_v1.0.0_Final.md`](../01-product/prd/PRD_Terra_Commerce_v1.0.0_Final.md)
+See [`CURRENT_BASELINE.md`](CURRENT_BASELINE.md) for the current Final PRD, FSD, ADR, and downstream specification baseline.
 
-## Next required artifact
+## Change rule
 
-Create the Terra Commerce Functional Specification Document v1.0.0 draft under:
-
-`docs/02-functional/fsd/FSD_Terra_Commerce_v1.0.0_Draft.md`
+Future changes follow change control and impact analysis. A change to a locked architecture or implementation decision requires a new ADR.
