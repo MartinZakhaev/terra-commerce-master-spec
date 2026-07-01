@@ -1,0 +1,23 @@
+registry_version: 1.0.0
+generated_from: docs/06-contracts/openapi.yaml
+default_effect: deny
+validation: The union of all referenced rule files must exactly equal the OpenAPI operationId set.
+rule_files:
+- domain: catalog
+  $ref: operation-permission-rules/catalog.rules.json
+- domain: oms
+  $ref: operation-permission-rules/oms.rules.json
+- domain: platform
+  $ref: operation-permission-rules/platform.rules.json
+- domain: realtime
+  $ref: operation-permission-rules/realtime.rules.json
+- domain: shipments
+  $ref: operation-permission-rules/shipments.rules.json
+- domain: storefront
+  $ref: operation-permission-rules/storefront.rules.json
+- domain: tenant
+  $ref: operation-permission-rules/tenant.rules.json
+- domain: webhooks
+  $ref: operation-permission-rules/webhooks.rules.json
+- domain: wms
+  $ref: operation-permission-rules/wms.rules.json
