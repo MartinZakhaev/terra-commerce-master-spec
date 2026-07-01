@@ -1,10 +1,14 @@
 registry_version: 1.0.0
 generated_from: docs/06-contracts/openapi.yaml
 default_effect: deny
+merge_rule: Each operation rule is merged with method, path, audience, ownership, idempotency, version, audit, and event metadata from its OpenAPI x-terra fields.
 validation: The union of all referenced rule files must exactly equal the OpenAPI operationId set.
+expected_operation_count: 134
 rule_files:
 - domain: catalog
   $ref: operation-permission-rules/catalog.rules.json
+- domain: integrations
+  $ref: operation-permission-rules/integrations.rules.json
 - domain: oms
   $ref: operation-permission-rules/oms.rules.json
 - domain: platform
