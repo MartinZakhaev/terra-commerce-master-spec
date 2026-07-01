@@ -1,5 +1,5 @@
 registry_version: 1.0.0
-inheritance_rule: Each event inherits producer, consumers, aggregate, scope, sensitivity, schema version, schemas, compatibility, and deprecation metadata from its containing group.
+inheritance_rule: Event names inherit metadata from their containing group.
 required_envelope_fields: [event_id, event_type, schema_version, aggregate_type, aggregate_id, aggregate_version, occurred_at, actor, data]
 compatibility_policy:
   compatible: [add_optional_field, add_event_type]
@@ -8,5 +8,6 @@ group_files:
 - $ref: event-registry/event-groups-1.json
 - $ref: event-registry/event-groups-2.json
 - $ref: event-registry/event-groups-3.json
+- $ref: event-registry/event-groups-11.json
 - $ref: event-registry/event-groups-4.json
-validation: The referenced files must contain 93 unique event names and every referenced schema must exist.
+expected_unique_event_count: 93
