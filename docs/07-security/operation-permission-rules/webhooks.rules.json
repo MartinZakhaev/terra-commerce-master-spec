@@ -1,0 +1,1 @@
+{"domain":"webhooks","rules":[{"operation_id":"receiveBiteshipWebhook","policy":"provider_verified"},{"operation_id":"receiveMidtransWebhook","policy":"provider_verified"}]}
